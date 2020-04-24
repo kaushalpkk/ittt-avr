@@ -1,0 +1,69 @@
+#define F_CPU 1000000UL
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+char x,y,z,time,t,u,sec,min,hr;
+
+void delayms(uint16_t millis) 
+{
+  while ( millis ) 
+  {
+    _delay_ms(1);
+    millis--;
+  }
+}
+
+
+char bcdconv(char time)
+{
+  t = time / 10;
+  u = time % 10;
+  t = t << 4;
+  y = t | u;
+
+  return (z);
+}
+
+
+int main(void) 
+
+{
+   char min = 0,sec = 0,hr = 0;
+
+  DDRB  = 0xFF; //mins
+  DDRC  = 0xFF; //secs
+  DDRD  = 0xFF; //hrs
+  
+  PORTC = 0x00;
+
+  while(1)
+
+   {
+    delayms(1000);
+
+    sec++;
+    if (sec > 59)
+         {
+           sec = 0;
+           min ++;
+           if (min > 59)
+              {
+               min = 0;
+               hr ++;
+               if (hr > 23)
+                  {
+                    hr = 0;
+
+                  }
+               bcdconv (hr);
+               PORTD = z;
+              }
+           bcdconv (min);
+           PORTB = z;
+         }
+        PORTC = PORTC & 0x01;
+
+   }            
+return (0);
+}

@@ -1,0 +1,71 @@
+* initialization settings..
+
+//works;;
+Init values to be sent to data port as... 0x00,0x03,0x030x03,0x02...
+
+>> function set, disp and cursor, clr lcd, inc and disp shift, disp and cursor..
+
+to clear display..
+
+0x01
+
+clear display and send cursor to home position..
+0x02 , 0x03	//not required... but shud check !!
+
+character entry mode: 
+
+0x04 - decrement and display shift off...	//prints frm right to left
+
+0x05 - decrement and display shift on..	//%....normal scroll....%if the 2 line was set.. it starts printing frm the line above the assigned line and prints in a reverse way
+*0x06 - increment and display shift off..	//prints frm right to left 
+0x07 - increment and display shift on..		//?? 24 bits r displayed in first row and later the other bits in lower....
+
+disp on/off and cursor :
+
+*0x08 - display off.. cursor underline off..blink off..	//displays the display and cursor settings...
+0x09 - display off.. cursor underline off..blink on..
+0x0a - display off.. cursor underline on..blink off..
+0x0b - display off.. cursor underline on..blink on..
+0x0c - display on.. cursor underline off..blink off..
+0x0d - display on.. cursor underline off..blink on..
+0x0e - display on.. cursor underline on..blink off..
+0x0f - display on.. cursor underline on..blink on..
+
+display/cursor shift :
+
+0x10 - cursor move , left shift...
+0x14 - cursor move , right shift...
+0x18 - display shift ,left shift ..
+0x1C - display shift ,right shift ..
+
+Function set :
+
+0x20 - 4bit, single line, 5x7
+0x24 - 4bit, single line, 5x10
+0x28 - 4bit, double line, 5x7
+0x2c - 4bit, double line, 5x10
+*0x30 - 8bit, single line, 5x7
+0x34 - 8bit, single line, 5x10
+0x38 - 8bit, double line, 5x7
+0x3c - 8bit, double line, 5x10
+
+CGRAM address varies from : 40 to 7F
+
+address must be like : 0 1 a a a a a a 
+
+DDRAM address varies from : 80 to FF
+
+
+address must be like : 1 a a a a a a a 
+
+@@@@	some notes on CGRAM...
+
+first 16 character in CGRAM are used for user defined characters....
+
+nxt 16 are used to display <blank characters> 
+
+0x80 to 0x9f are not used ....
+
+0xe0 to 0xff are greek symbols...
+
+

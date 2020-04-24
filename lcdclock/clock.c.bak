@@ -1,0 +1,87 @@
+#define F_CPU 1000000UL
+
+#include <avr/io.h>
+#include <util/delay.h>
+#include "lcd4.h"
+
+char x,y,z,time,t,u,sec,min,hr;
+char h[] = "H:"; //2
+char m[] = "M:"; //2
+char s[] = "S:"; //2
+
+void delayms(uint16_t millis) 
+{
+  while ( millis ) 
+  {
+    _delay_ms(1);
+    millis--;
+  }
+}
+
+
+char bcdconv(char time)
+{
+  t = time / 10;
+  u = time % 10;
+  t = t << 4;
+  y = t | u;
+
+  return (z);
+}
+
+
+int main(void) 
+
+{
+   char min = 0,sec = 0,hr = 0;
+
+InitLCD();
+// DDRB  = 0xFF; //mins
+ // DDRC  = 0xFF; //secs
+ // DDRD  = 0xFF; //hrs
+  
+//  PORTC = 0x00;
+
+
+SendString(s, 1, 12);
+
+SendString(m, 1, 6);
+
+SendString(h, 1, 0); 
+
+  while(1)
+   {
+    delayms(1000);
+
+    sec++;
+    if (sec > 59)
+         {
+           sec = 0;
+          sendstring(sec, 1, 14);
+           min ++;
+           if (min > 59)
+              {
+               min = 00;
+               hr ++;
+               if (hr > 23)
+                  {
+                    hr = 00;
+
+                  }
+               //hrs
+                   
+
+                   SendInt(hr, 1, 3);
+              }
+                   
+                   
+                   SendInt(min, 1, 9);
+         }
+                   
+                   
+                   SendInt(sec, 1, 14);
+        
+
+   }            
+return (0);
+}

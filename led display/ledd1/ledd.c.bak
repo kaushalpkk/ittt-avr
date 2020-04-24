@@ -1,0 +1,58 @@
+#define F_CPU 1000000UL
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+
+void delayms(uint16_t millis) 
+{
+  while ( millis ) 
+  {
+    _delay_ms(1);
+    millis--;
+  }
+}
+
+
+int main(void) 
+{
+
+  DDRB  = 0xFF; //anodes    ...displays the charecter as in line
+  DDRC  = 0xFF; //cathodes  ..shifts frm 11110 to 01111
+  
+  PORTC = 0x00;  // LOGIC LOW horizontal
+  PORTB = 0x00;  // LOGIC HIGH vertical
+
+  while(1)
+
+   {
+// delay as in  5 led rows... PoV = 1/(16 -30) of sec .... delay is 12.5
+
+/*  X x 0 x 0
+    0 x x 0 0
+    0 x 0 0 0
+    0 x x 0 0
+    x x 0 x 0   */
+
+    PORTB = 0x11; //moves from left to right on board..
+    PORTC = 0x1E;       
+    delayms(11);        
+
+    PORTB = 0x1F;
+    PORTC = 0x1D;
+    delayms(11);
+
+    PORTB = 0x0A;
+    PORTC = 0x1B;
+    delayms(11);
+
+    PORTB = 0x11;
+    PORTC = 0x17;
+    delayms(11);
+
+    PORTB = 0x11;
+    PORTC = 0x0F;
+    delayms(11);
+    }
+return(0);
+}

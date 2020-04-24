@@ -1,0 +1,259 @@
+
+#include <stdlib.h>
+
+//#include <avr/interrupt.h>
+//#include <avr/signal.h>
+
+#define inp(x) x
+#define outp(x,y) y=x
+#define sbi(y,x) y|=_BV(x)
+#define cbi(y,x) y&=~_BV(x)
+
+#define BYTE            unsigned char
+#define WORD            unsigned int
+
+#define PORT            PORTD   // allows easy port change
+#define DDR             DDRD
+#define PIN             PIND
+
+#define RS_PIN          5
+#define RW_PIN          4
+#define E_PIN           6
+
+static void SendData(BYTE value);
+static void Send(BYTE value);
+static void SendByte(BYTE value);
+static void Clock(void);
+//static void Delay(uint16_t milliSeconds);
+static inline void Tick(void);
+
+
+extern void InitLCD(void);
+extern void CustChar(unsigned char c, char *data);
+extern void SendCommand(unsigned char value);
+extern void SendString(char *pt, int line, int position);
+extern void SendFloat(float value, int line, int position);
+extern void SendLong(long number, int line, int position);
+extern void SendInt(int number, int line, int position);
+extern void sprintl(long number, char *pt);
+
+
+/******************************************************************************
+ 
+ Implements a stand alone interface to a HD44780 based 2 line by 16 character 
+ LCD display.
+  
+  Ron Kreymborg
+  
+******************************************************************************/
+
+
+
+static BYTE commandFlag;
+
+
+//-----------------------------------------------------------------------------
+// Provide a small delay to ensure a minimum clock frequency.
+//
+static inline void Tick(void)
+{
+    asm("nop\n\tnop"::);
+}
+
+
+void CustChar(unsigned char c, char *data) {
+  char i;
+  SendCommand(0x40+((c&0x07)<<3)); //Set CG-RAM address
+  for (i=0; i<8; i++) {
+    SendData(*data++);
+  }
+}
+
+//-----------------------------------------------------------------------------
+// Display the null terminated string in the specified line starting at the 
+// specified position.
+//
+void SendString(char *pt, int line, int position)
+{
+    if (line == 1)
+        SendCommand(0x80 + position);
+    else
+        SendCommand(0xc0 + position);
+    while (*pt)
+        SendData(*pt++);
+}
+
+//-----------------------------------------------------------------------------
+// Display the null terminated string in the specified line starting at the 
+// specified position.
+//
+void SendLong(long number, int line, int position)
+{
+    char temp[15];
+
+    sprintl(number, temp);
+    SendString(temp, line, position);
+}
+    
+//-----------------------------------------------------------------------------
+// Display the null terminated string in the specified line starting at the 
+// specified position.
+//
+void SendInt(int number, int line, int position)
+{
+    char temp[15];
+    
+    itoa(number, temp, 10);
+    SendString(temp, line, position);
+}
+
+//-----------------------------------------------------------------------------
+// Display the null terminated string in the specified line starting at the 
+// specified position.
+//
+void SendFloat(float value, int line, int position)
+{
+   char temp[15];
+
+   dtostre(value, temp, 4, 3);
+   SendString(temp, line, position);
+}
+
+//-----------------------------------------------------------------------------
+// Convert the number to the equeivelent ascii string.
+//
+void sprintl(long number, char *pt)
+{
+    int i, a, flag;
+    long divisor = 1000000000L;
+      
+    if (number < 0L)
+        *pt++ = '-';
+        
+    if (number == 0L)
+    {
+        *pt++ = '0';
+    }
+    else
+    {
+        flag = 0;
+        for (i=1; i<11; i++)
+        {
+            a = (int)(number / divisor);
+            if (a > 0)
+            {
+                flag = 1;
+                number = number - (long)a * divisor;
+            }
+            if (flag)
+            {
+                *pt++ = '0' + (char)a;
+            }
+            divisor /= 10L;
+        } 
+    }
+    *pt = '\0';
+}
+
+//-----------------------------------------------------------------------------
+// Initialise the lcd display. Must be called before any display functions.
+//
+void InitLCD(void)
+{
+	outp(0x00, PORT);			    // all low
+	outp(0xff, DDR);			    // all output
+	_delay_ms(50);                      // wait 50 mSec
+	outp(0x03, PORT);
+	_delay_ms(5);
+	outp(0x03, PORT);
+	_delay_ms(5);
+	outp(0x03, PORT);
+	_delay_ms(5);
+	outp(0x02, PORT);
+	_delay_ms(5);
+	
+	SendCommand(0x28);
+	SendCommand(0x08);
+	SendCommand(0x0c);
+	SendCommand(0x01);
+	SendCommand(0x06);
+}
+    
+//-----------------------------------------------------------------------------
+// Prepare and send a command byte.
+//
+void SendCommand(BYTE value)
+{
+    commandFlag = 0;
+    Send(value);
+}
+
+//-----------------------------------------------------------------------------
+// Prepare and send a data byte.
+//
+static void SendData(BYTE value)
+{
+    commandFlag = 1;
+    Send(value);
+}
+
+//-----------------------------------------------------------------------------
+// Send the byte to the display. First check if the display is busy.
+//
+static void Send(BYTE value)
+{
+    BYTE state;
+    
+	outp(0xf0, DDR);			    // low 4 bits input
+	outp(0x1f, PORT);               // R/W high, pullup on
+//	do{
+	    Tick();
+        sbi(PORT, E_PIN);           // clock high
+        Tick();
+        state = inp(PIN);
+        cbi(PORT, E_PIN);
+        Tick();
+        sbi(PORT, E_PIN);
+        Tick();
+        cbi(PORT, E_PIN);
+//    } while (state & 0x08);
+//    } while (state & (0x01 << RW_PIN));
+    _delay_ms(5);
+
+    Tick();
+    outp(0x00, PORT);               // R/W low
+	outp(0xff, DDR);			    // low 4 bits output again
+	SendByte(value>>4);             // send high nibble
+	SendByte(value);                // send low nibble
+}
+
+//-----------------------------------------------------------------------------
+// Actually send the byte. Use the global lag to decide whether a command
+// or data byte.
+//
+static void SendByte(BYTE value)
+{
+    value &= 0x0f;              // mask off high nibble
+    if (commandFlag)                // or in the RS bit
+        value |= 1<<RS_PIN;
+    Tick();
+    outp(value, PORT);          // output low nibble
+    Clock();
+}
+
+//-----------------------------------------------------------------------------
+// Provide a high to low transition on the E (clock) line.
+//
+static void Clock(void)
+{
+    sbi(PORT, E_PIN);
+    Tick();
+    cbi(PORT, E_PIN);
+}
+
+
+
+
+
+
+

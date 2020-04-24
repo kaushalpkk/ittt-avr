@@ -1,0 +1,56 @@
+// PS-1 Keyboard interface test program
+
+#include <avr/io.h>
+//#include <stdlib.h>
+//#include <avr/signal.h>
+#include <avr/interrupt.h>
+
+#include "serial.h"
+#include "kb.h"
+#include "StdDefs.h"
+#include "scancodes.h"
+
+void initialize(void);
+
+
+int main(void)
+{
+    unsigned char key;
+    
+    initialize();
+    putchar('I');
+
+    while(1)
+    {
+        key=getchar();
+        putchar(key);
+        msleep(100);
+    }
+    return 1;
+}
+
+void initialize(void)
+   {
+   cli();
+   
+   PORTB = 0xFD;
+   DDRB = 0x02;     // Port B pin 1 as test pin
+   TESTPIN_OFF();
+
+   PORTD = 0x5F;
+   DDRD = 0xA0;     // All inputs with pullups.  UART will override.
+                    // Pin5 - Out as RunLED, Pin7-out as RF module power
+
+   init_kb();
+   init_uart();       
+
+   UART_CONTROL_REG = 0x18;   //Transmitter enabled, receiver enabled, no ints
+   setbaud(BAUD19K);
+   
+   GIMSK= 0x40;        // Enable INT0 interrupt
+   
+   //putchar('I');
+
+   sei();
+   }
+

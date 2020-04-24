@@ -1,0 +1,30 @@
+#define F_CPU 1000000
+
+#include <avr/io.h>
+#include <util/delay.h>
+#include "lcd4.h"
+
+void delayms(uint16_t millis) {
+  while ( millis ) {
+    _delay_ms(1);
+    millis--;
+  }
+}
+int main (void)
+{
+  char str1[] = "hello world..";
+  delayms(1000);
+
+  SendString(str1, 2, 0);// plain string
+  delayms(3000);
+
+  SendCommand(0x80);
+  while(1){
+
+delayms(1000);
+
+SendString(str2, 2, 0);// plain string
+
+
+  }
+} 

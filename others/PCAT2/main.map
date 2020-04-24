@@ -1,0 +1,432 @@
+Archive member included because of file (symbol)
+
+c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_divmodhi4.o)
+                              StdDefs.o (__divmodhi4)
+c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_copy_data.o)
+                              main.o (__do_copy_data)
+c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_clear_bss.o)
+                              main.o (__do_clear_bss)
+c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_udivmodhi4.o)
+                              c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_divmodhi4.o) (__udivmodhi4)
+
+Allocating common symbols
+Common symbol       size              file
+
+UART_buffer         0x40              serial.o
+inpt                0x2               kb.o
+bitcount            0x1               kb.o
+outptr              0x2               serial.o
+outpt               0x2               kb.o
+edge                0x1               kb.o
+kb_buffer           0x40              kb.o
+inptr               0x2               serial.o
+buff_cnt            0x1               serial.o
+buffcnt             0x1               kb.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+LOAD main.o
+LOAD kb.o
+LOAD serial.o
+LOAD StdDefs.o
+LOAD c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\libm.a
+LOAD c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a
+LOAD c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\libc.a
+LOAD c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000      0x7e6
+ *(.vectors)
+ .vectors       0x00000000       0x44 c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+                0x00000044                __ctors_start = .
+ *(.ctors)
+                0x00000044                __ctors_end = .
+                0x00000044                __dtors_start = .
+ *(.dtors)
+                0x00000044                __dtors_end = .
+ *(.progmem.gcc*)
+ *(.progmem*)
+ .progmem.data  0x00000044      0x110 kb.o
+                0x000000cc                shifted
+                0x00000044                unshifted
+                0x00000154                . = ALIGN (0x2)
+ *(.init0)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000154        0xc c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+ *(.init3)
+ *(.init4)
+ .init4         0x00000160       0x16 c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_copy_data.o)
+                0x00000160                __do_copy_data
+ .init4         0x00000176       0x10 c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_clear_bss.o)
+                0x00000176                __do_clear_bss
+ *(.init5)
+ *(.init6)
+ *(.init7)
+ *(.init8)
+ *(.init9)
+ .init9         0x00000186        0x4 c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+ *(.text)
+ .text          0x0000018a        0x4 c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+                0x0000018a                __bad_interrupt
+                0x0000018a                __vector_6
+                0x0000018a                __vector_3
+                0x0000018a                __vector_11
+                0x0000018a                __vector_13
+                0x0000018a                __vector_7
+                0x0000018a                __vector_5
+                0x0000018a                __vector_4
+                0x0000018a                __vector_9
+                0x0000018a                __vector_2
+                0x0000018a                __vector_15
+                0x0000018a                __vector_8
+                0x0000018a                __vector_14
+                0x0000018a                __vector_10
+                0x0000018a                __vector_16
+ .text          0x0000018e       0x58 main.o
+                0x0000018e                main
+                0x000001b6                initialize
+ .text          0x000001e6      0x2ca kb.o
+                0x00000280                decode
+                0x000001e6                __vector_1
+                0x00000438                init_kb
+                0x00000460                getchar
+                0x000003f4                put_kbbuff
+ .text          0x000004b0       0xea serial.o
+                0x00000546                putchar
+                0x000004b0                __vector_12
+                0x0000052a                init_uart
+                0x00000544                clr
+ .text          0x0000059a      0x1fe StdDefs.o
+                0x0000070a                putstr
+                0x0000059a                putBCD
+                0x00000690                setbaud
+                0x0000076a                print_hexbyte
+                0x000006dc                test_pin
+                0x000006e8                msleep
+                0x00000694                run_led
+                0x00000798                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x00000798       0x26 c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_divmodhi4.o)
+                0x00000798                __divmodhi4
+                0x00000798                _div
+ .text.libgcc   0x000007be       0x28 c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_udivmodhi4.o)
+                0x000007be                __udivmodhi4
+                0x000007e6                . = ALIGN (0x2)
+ *(.fini9)
+ *(.fini8)
+ *(.fini7)
+ *(.fini6)
+ *(.fini5)
+ *(.fini4)
+ *(.fini3)
+ *(.fini2)
+ *(.fini1)
+ *(.fini0)
+                0x000007e6                _etext = .
+
+.data           0x00800060        0x8 load address 0x000007e6
+                0x00800060                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800060        0x8 serial.o
+                0x00800060                CLR
+ *(.gnu.linkonce.d*)
+                0x00800068                . = ALIGN (0x2)
+                0x00800068                _edata = .
+                0x00800068                PROVIDE (__data_end, .)
+
+.bss            0x00800068       0x94
+                0x00800068                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x00800068        0x4 kb.o
+ .bss           0x0080006c        0x4 StdDefs.o
+ *(COMMON)
+ COMMON         0x00800070       0x47 kb.o
+                                  0x0 (size before relaxing)
+                0x00800070                inpt
+                0x00800072                bitcount
+                0x00800073                outpt
+                0x00800075                edge
+                0x00800076                kb_buffer
+                0x008000b6                buffcnt
+ COMMON         0x008000b7       0x45 serial.o
+                                  0x0 (size before relaxing)
+                0x008000b7                UART_buffer
+                0x008000f7                outptr
+                0x008000f9                inptr
+                0x008000fb                buff_cnt
+                0x008000fc                PROVIDE (__bss_end, .)
+                0x000007e6                __data_load_start = LOADADDR (.data)
+                0x000007ee                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008000fc        0x0
+                0x008000fc                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008000fc                PROVIDE (__noinit_end, .)
+                0x008000fc                _end = .
+                0x008000fc                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0 load address 0x000007ee
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.stab           0x00000000     0x1a94
+ *(.stab)
+ .stab          0x00000000      0x2a0 c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+ .stab          0x000002a0      0x444 main.o
+                                0x450 (size before relaxing)
+ .stab          0x000006e4      0x8e8 kb.o
+                                0xa50 (size before relaxing)
+ .stab          0x00000fcc      0x378 serial.o
+                                0x4b0 (size before relaxing)
+ .stab          0x00001344      0x750 StdDefs.o
+                                0x87c (size before relaxing)
+
+.stabstr        0x00000000      0xdfa
+ *(.stabstr)
+ .stabstr       0x00000000      0xdfa c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+                                  0x0 (size before relaxing)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info)
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(main.elf elf32-avr)
+
+Cross Reference Table
+
+Symbol                                            File
+CLR                                               serial.o
+UART_buffer                                       serial.o
+__bad_interrupt                                   c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__bss_end                                         c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_clear_bss.o)
+__bss_start                                       c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_clear_bss.o)
+__data_end                                        c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_copy_data.o)
+__data_load_start                                 c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_copy_data.o)
+__data_start                                      c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_copy_data.o)
+__divmodhi4                                       c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_divmodhi4.o)
+                                                  StdDefs.o
+__do_clear_bss                                    c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_clear_bss.o)
+                                                  StdDefs.o
+                                                  serial.o
+                                                  kb.o
+                                                  main.o
+__do_copy_data                                    c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_copy_data.o)
+                                                  StdDefs.o
+                                                  serial.o
+                                                  kb.o
+                                                  main.o
+__init                                            c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__stack                                           c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+                                                  main.o
+__udivmodhi4                                      c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_udivmodhi4.o)
+                                                  c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_divmodhi4.o)
+__vector_1                                        kb.o
+                                                  c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_10                                       c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_11                                       c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_12                                       serial.o
+                                                  c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_13                                       c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_14                                       c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_15                                       c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_16                                       c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_2                                        c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_3                                        c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_4                                        c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_5                                        c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_6                                        c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_7                                        c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_8                                        c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_9                                        c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vector_default                                  c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+__vectors                                         c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+_div                                              c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\avr5\libgcc.a(_divmodhi4.o)
+bitcount                                          kb.o
+buff_cnt                                          serial.o
+buffcnt                                           kb.o
+clr                                               serial.o
+                                                  kb.o
+decode                                            kb.o
+edge                                              kb.o
+getchar                                           kb.o
+                                                  main.o
+init_kb                                           kb.o
+                                                  main.o
+init_uart                                         serial.o
+                                                  main.o
+initialize                                        main.o
+inpt                                              kb.o
+inptr                                             serial.o
+kb_buffer                                         kb.o
+main                                              main.o
+                                                  c:\avrgcc8\bin\..\lib\gcc-lib\avr\3.2\..\..\..\..\avr\lib\avr5\crtm163.o
+msleep                                            StdDefs.o
+                                                  main.o
+outpt                                             kb.o
+outptr                                            serial.o
+print_hexbyte                                     StdDefs.o
+                                                  kb.o
+putBCD                                            StdDefs.o
+put_kbbuff                                        kb.o
+putchar                                           serial.o
+                                                  StdDefs.o
+                                                  main.o
+putstr                                            StdDefs.o
+run_led                                           StdDefs.o
+                                                  kb.o
+setbaud                                           StdDefs.o
+                                                  main.o
+shifted                                           kb.o
+test_pin                                          StdDefs.o
+unshifted                                         kb.o
